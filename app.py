@@ -4,7 +4,7 @@ import time
 
 app = Flask(__name__)
 
-# simulated metircs
+# Simulated metrics
 total_requests = 0
 
 
@@ -13,16 +13,16 @@ def metrics():
     global total_requests
     total_requests += 1
 
-    # simulated values
+    # Simulated values
     request_processing_latency = round(
-        random.uniform(0.1, 1.5), 3)  # latency in senconds
+        random.uniform(0.1, 1.5), 3)  # Latency in seconds
     model_prediction_success_rate = round(
         random.uniform(80, 100), 2)  # Success rate in %
 
-    # Return the metrics in prometheus format
+    # Return the metrics in Prometheus format
     prometheus_metrics = (
-        f"# HELP total_api_requests_total Total number of api requests\n"
-        f"# TYPE total_api_requests_total_counter\n"
+        f"# HELP total_api_requests_total Total number of API requests\n"
+        f"# TYPE total_api_requests_total counter\n"
         f"total_api_requests_total {total_requests}\n"
         f"\n"
         f"# HELP request_processing_latency_seconds Latency for request processing\n"
@@ -34,12 +34,12 @@ def metrics():
         f"model_prediction_success_rate {model_prediction_success_rate}\n"
     )
 
-    return prometheus_metrics, 200, {"content-Type": "text/plain; charset= utf-8"}
+    return prometheus_metrics, 200, {"Content-Type": "text/plain; charset=utf-8"}
 
 
 @app.route("/", methods=["GET"])
 def index():
-    return jsonify({"message": "Welcome to the Flask metrics App! Access /metrics for prometheus metrics."})
+    return jsonify({"message": "Welcome to the Flask Metrics App! Access /metrics for Prometheus metrics."})
 
 
 if __name__ == "__main__":
